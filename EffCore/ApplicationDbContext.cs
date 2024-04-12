@@ -26,18 +26,21 @@ namespace EffCore
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BlogTypeConfigration).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostTypeConfigration).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AutorTypeConfigration).Assembly);
             modelBuilder.Entity<Post>(po =>
             {
                 po.Property(p => p.Title).IsRequired().HasColumnType("varchar(200)");
                 po.Property(p => p.Content).IsRequired().HasColumnName("Post Content");
             });
+
         }
         #endregion
 
         #region DbSet Table
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Post> Posts { get; set; }   
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Author> Authors { get; set; }
         #endregion
     }
 }

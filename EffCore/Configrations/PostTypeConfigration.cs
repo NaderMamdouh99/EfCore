@@ -13,7 +13,9 @@ namespace EffCore.Configrations
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
+            // Edit Column Name  
             builder.Property(p => p.Title).IsRequired().HasColumnName("Post Title");
+            // Edit Column Type 
             builder.Property(p => p.Content).IsRequired().HasColumnType("nvarchar(200)");
         }
     }

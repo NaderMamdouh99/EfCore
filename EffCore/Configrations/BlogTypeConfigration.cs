@@ -13,7 +13,11 @@ namespace EffCore.Configrations
     {
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
+            // Edit Column Name
             builder.Property(m=>m.Url).IsRequired().HasColumnName("Post Url");
+            // Default Value
+            builder.Property(b => b.Rate).HasDefaultValue(2);
+            builder.Property(b => b.CreatedOn).HasDefaultValueSql("GETDATE()");
         }
     }
 }
