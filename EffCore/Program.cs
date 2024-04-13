@@ -1,5 +1,6 @@
 ﻿using EffCore.Models;
 using System;
+using System.Linq;
 
 namespace EffCore
 {
@@ -40,6 +41,20 @@ namespace EffCore
             //_context.SaveChanges(); 
             #endregion
 
+
+            DataSeeding();
         }
+
+        #region Methods to insert Data in Sql (Data Seeding)
+        public static void DataSeeding()
+        {
+            using var context = new ApplicationDbContext();
+            context.Database.EnsureCreated();
+            var blog = context.Blogs.FirstOrDefault(b => b.Url == "www.gmail.com");
+            if (blog == null)
+                context.Add(new Blog { Url = "www.gmail.com", Rate = 7, });
+            context.SaveChanges();
+        } 
+        #endregion
     }
 }

@@ -33,6 +33,21 @@ namespace EffCore
                 po.Property(p => p.Content).IsRequired().HasColumnName("Post Content");
             });
 
+            #region DataSeeding
+
+            modelBuilder.Entity<Blog>()
+                        .HasData(
+                            new Blog { Id = 1,Url="Www.google.com", },
+                                 new Blog { Id = 2,Url="Www.facebook.com", }                       
+                                );
+
+            modelBuilder.Entity<Post>()
+                        .HasData(
+                                    new Post { Id = 1, Content = "Good Morning", Title = "Shared Post",BlogId=1 }
+                                );
+
+            #endregion
+
         }
         #endregion
 
