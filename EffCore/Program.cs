@@ -10,6 +10,13 @@ namespace EffCore
         {
             var _context = new ApplicationDbContext();
 
+            //var Stocks = _context.Stocks.OrderBy(m=>m.Id).Last();
+            var Stocks = _context.Stocks.Where(m=>m.Id < 500 && m.Name.StartsWith("z")).ToList();
+            foreach (var stock in Stocks)
+                Console.WriteLine($"Id: {stock.Id} Name: {stock.Name}");
+
+            //foreach (var stock in Stocks)
+            //    Console.WriteLine($"Id: {stock.Id} Name: {stock.Name} ");
 
             #region Default Value 
             //var Blog = new Blog()
