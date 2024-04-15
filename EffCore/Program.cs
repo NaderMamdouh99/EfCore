@@ -1,5 +1,7 @@
 ﻿using EffCore.Models;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EffCore
@@ -10,13 +12,27 @@ namespace EffCore
         {
             var _context = new ApplicationDbContext();
 
-            //var Stocks = _context.Stocks.OrderBy(m=>m.Id).Last();
-            var Stocks = _context.Stocks.Where(m=>m.Id < 500 && m.Name.StartsWith("z")).ToList();
-            foreach (var stock in Stocks)
-                Console.WriteLine($"Id: {stock.Id} Name: {stock.Name}");
+            #region Skip && Take
+            //var stocks = GetData(4, 20);
+            //foreach (var stock in stocks)
+            //    Console.WriteLine($"Id: {stock.Id} - Name: {stock.Name}");
+            #endregion
 
+            #region Order By Descending && ThenBy
+            //var stocks = _context.Stocks.OrderBy(m=>m.Industry).ThenByDescending(m=>m.Balance).ToList();
+
+            //foreach (var stock in stocks)
+            //{
+            //    Console.WriteLine($"Industry: {stock.Industry} - Balance: {stock.Balance}");
+            //}
+            #endregion
+
+            #region Where && Last && OrderBy
+            //var Stocks = _context.Stocks.OrderBy(m=>m.Id).Last();
+            //var Stocks = _context.Stocks.Where(m => m.Id < 500 && m.Name.StartsWith("z")).ToList();
             //foreach (var stock in Stocks)
-            //    Console.WriteLine($"Id: {stock.Id} Name: {stock.Name} ");
+            //    Console.WriteLine($"Id: {stock.Id} Name: {stock.Name}"); 
+            #endregion
 
             #region Default Value 
             //var Blog = new Blog()
@@ -61,7 +77,15 @@ namespace EffCore
             if (blog == null)
                 context.Add(new Blog { Url = "www.gmail.com", Rate = 7, });
             context.SaveChanges();
-        } 
+        }
+        #endregion
+
+        #region Pagenation
+        public static List<Stocks> GetData(int pageNumber , int pageSize)
+        {
+            using var context = new ApplicationDbContext();
+            return context.Stocks.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+        }
         #endregion
     }
 }
