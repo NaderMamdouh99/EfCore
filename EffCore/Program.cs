@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EffCore
 {
@@ -12,6 +13,16 @@ namespace EffCore
         {
             var _context = new ApplicationDbContext();
 
+            #region GroupBy
+            //var Industriey = _context.Stocks
+            //    .GroupBy(s => s.Industry)
+            //    .Select(s => new { Name = s.Key, StockCount = s.Count() })
+            //    .OrderByDescending(m => m.StockCount);
+
+            //foreach (var Industry in Industriey)
+            //    Console.WriteLine($"IndustryName: {Industry.Name} - StockCount: {Industry.StockCount}");
+            #endregion
+
             #region Skip && Take
             //var stocks = GetData(4, 20);
             //foreach (var stock in stocks)
@@ -19,7 +30,7 @@ namespace EffCore
             #endregion
 
             #region Order By Descending && ThenBy
-            //var stocks = _context.Stocks.OrderBy(m=>m.Industry).ThenByDescending(m=>m.Balance).ToList();
+            //var stocks = _context.Stocks.OrderBy(m => m.Industry).ThenByDescending(m => m.Balance).ToList();
 
             //foreach (var stock in stocks)
             //{
@@ -86,6 +97,19 @@ namespace EffCore
             using var context = new ApplicationDbContext();
             return context.Stocks.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
+
+
+        #region Elish
+        //public static int UpdateData(string _name,string _balance)
+        //{
+        //    int status = 0;
+        //    using var context = new ApplicationDbContext();
+        //    status = context.Stocks.Where(x=>x.Id ==1).;
+        //    return status;
+        //} 
+        #endregion
+
+
         #endregion
     }
 }
