@@ -15,5 +15,6 @@ namespace EffCore.Models
         public int BlogId { get; set; }
         [ForeignKey(nameof(BlogId))]
         public Blog Blog { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

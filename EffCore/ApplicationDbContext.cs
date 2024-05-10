@@ -31,6 +31,8 @@ namespace EffCore
             {
                 po.Property(p => p.Title).IsRequired().HasColumnType("varchar(200)");
                 po.Property(p => p.Content).IsRequired().HasColumnName("Post Content");
+                // Globsl Filter in Full Project for this Entity (Post)
+                po.HasQueryFilter( p => !p.IsDeleted);
             });
 
             #region DataSeeding
@@ -57,6 +59,8 @@ namespace EffCore
         public DbSet<Post> Posts { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Stocks> Stocks { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Nationalities> Nationalities { get; set; }
         #endregion
     }
 }
